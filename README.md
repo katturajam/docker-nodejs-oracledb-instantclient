@@ -8,7 +8,7 @@ Supported tags and respective Dockerfile links
 
 # Usage to build your apps
 
-FROM katturaja/docker-node-oracle-base:8.12.0-slim
+`FROM katturaja/docker-node-oracle-base:8.12.0-slim
 
 ## BUILD ARGUMENTS AND APPLICATION
 ARG NPM_TOKEN
@@ -27,4 +27,4 @@ RUN npm cache clean -f \
 && npm install --only=prod
 
 EXPOSE 3000
-CMD ["node", "server.js"]
+CMD ["node", "server.js"]`
