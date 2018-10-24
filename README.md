@@ -8,16 +8,12 @@ Supported tags and respective Dockerfile links
 
 # Usage to build your apps
 
-```FROM katturaja/docker-node-oracle-base:8.12.0-slim
-
-## BUILD ARGUMENTS AND APPLICATION
-ARG NPM_TOKEN
-ARG NPM_LOG_LEVEL
-
-## Create app base directory
+```
+FROM katturaja/docker-node-oracle-base:8.12.0-slim
+# Create app base directory
 RUN mkdir -p /src
 
-## Specify the "working directory" for the rest of the Dockerfile
+# Specify the "working directory" for the rest of the Dockerfile
 WORKDIR /src
 
 COPY . /src
@@ -27,4 +23,5 @@ RUN npm cache clean -f \
 && npm install --only=prod
 
 EXPOSE 3000
-CMD ["node", "server.js"]```
+CMD ["node", "server.js"]
+```
