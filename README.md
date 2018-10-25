@@ -1,6 +1,6 @@
-# Docker NodeJs + Oracledb instantclient base Image - Slim Version
+# Docker NodeJs + Oracledb instantclient base image
 
-The image built for nodejs with oracle db support.
+The docker slim image built for nodejs with oracle db instantclient as base docker image.
 Extend or Use the image to build your nodejs of oracledb application.
 
 Supported tags and respective Dockerfile links
@@ -9,7 +9,7 @@ Supported tags and respective Dockerfile links
 # Usage to build your apps
 
 ```
-FROM katturaja/docker-nodejs-oracledb-instantcleint:8.12.0-slim
+FROM katturaja/docker-nodejs-oracledb-base:8.12.0-slim
 # Create app base directory
 RUN mkdir -p /src
 
