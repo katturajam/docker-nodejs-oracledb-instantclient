@@ -1,4 +1,4 @@
-FROM katturaja/docker-node-oracle-base:8.12.0-slim
+FROM katturaja/docker-nodejs-oracledb-instantclient:8.12.0-slim
 
 # Create app base directory
 RUN mkdir -p /src
