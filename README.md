@@ -1,4 +1,4 @@
-# node-oracle-base
+# Docker NodeJs + Oracledb instantclient base Image - Slim Version
 
 The image built for nodejs with oracle db support.
 Extend or Use the image to build your nodejs of oracledb application.
