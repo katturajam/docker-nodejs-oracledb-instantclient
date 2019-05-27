@@ -6,13 +6,13 @@ Extend the docker image as a base image to build your nodejs of oracledb applica
 
 Supported tags and respective Dockerfile links
 
-[Nodejs 8.12.0-slim](https://hub.docker.com/_/node/ "Docker nodejs") + [node-oracledb](https://github.com/oracle/node-oracledb "Oracle Node JS Client") supported from 2.3.0.
+[Nodejs 10.15.3-slim](https://hub.docker.com/_/node/ "Docker nodejs") + [node-oracledb](https://github.com/oracle/node-oracledb "Oracle Node JS Client") supported from 2.3.0.
 
 
 # Usage to build your apps
 
 ```
-FROM katturaja/docker-nodejs-oracledb-instantclient:8.12.0-slim
+FROM katturaja/docker-nodejs-oracledb-instantclient:10.15.3-slim
 # Create app base directory
 RUN mkdir -p /src
 
