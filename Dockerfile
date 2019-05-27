@@ -3,6 +3,8 @@ FROM node:8.12.0-slim
 # update sources list
 RUN apt-get clean \
     && apt-get update
+    
+RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
 
 #INSTALL LIBAIO1 & UNZIP (NEEDED FOR STRONG-ORACLE)
 RUN apt-get install -y unzip \
@@ -34,6 +36,7 @@ RUN echo '/opt/oracle/instantclient/' | tee -a /etc/ld.so.conf.d/oracle_instant_
 # Clean the packages
 RUN apt-get purge -y unzip \
 && apt-get purge -y wget \
+&& apt-get purge -y curl \
 && rm -rf /var/lib/apt/lists/* \
 && apt-get -y autoremove
 #  <---- This is base image Extend to build your nodejs with oracle db application --->
