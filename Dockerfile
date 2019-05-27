@@ -1,15 +1,18 @@
-FROM node:8.12.0-slim
+FROM node:10.15.3-slim
 
 # update sources list
 RUN apt-get clean \
     && apt-get update
-    
-RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
 
 #INSTALL LIBAIO1 & UNZIP (NEEDED FOR STRONG-ORACLE)
 RUN apt-get install -y unzip \
     && apt-get install -y wget \
-    && apt-get install -y libaio1
+    && apt-get install -y libaio1 \
+    && npm install pm2 -g --only=production
+
+# Util to fetch AWS SSM environment parameter
+RUN wget https://github.com/Droplr/aws-env/raw/master/bin/aws-env-linux-amd64 -O /bin/aws-env \
+    && chmod +x /bin/aws-env
 
 #ADD ORACLE INSTANT CLIENT
 RUN mkdir -p opt/oracle
@@ -25,11 +28,18 @@ RUN unzip /opt/oracle/instantclient-basiclite-linux.x64-12.2.0.1.0.zip -d /opt/o
  && ln -s /opt/oracle/instantclient/libocci.so.12.1 /opt/oracle/instantclient/libocci.so
 
 # Setting the Environment Variable
+# For aws ssm parameter store
+ENV AWS_ENV_PATH=$AWS_SSM_ENV_PATH
+ENV AWS_REGION=$AWS_SSM_REGION
+# For Oracle DB
 ENV LD_LIBRARY_PATH="/opt/oracle/instantclient"
 ENV OCI_HOME="/opt/oracle/instantclient"
 ENV OCI_LIB_DIR="/opt/oracle/instantclient"
 ENV OCI_INCLUDE_DIR="/opt/oracle/instantclient/sdk/include"
 ENV OCI_VERSION=12
+# PM2 runtime environment variable
+ENV PM2_PUBLIC_KEY=$PM2_PUBLIC_KEY
+ENV PM2_SECRET_KEY=$PM2_SECRET_KEY
 
 RUN echo '/opt/oracle/instantclient/' | tee -a /etc/ld.so.conf.d/oracle_instant_client.conf && ldconfig
 
